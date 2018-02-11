@@ -1,23 +1,33 @@
-discontinuous-range
-===================
+# drange
+
+For adding/subtracting sets of range of numbers.
+
+[![Build Status](https://secure.travis-ci.org/fent/node-drange.svg)](http://travis-ci.org/fent/node-drange)
+[![Dependency Status](https://david-dm.org/fent/node-drange.svg)](https://david-dm.org/fent/node-drange)
+[![codecov](https://codecov.io/gh/fent/node-drange/branch/master/graph/badge.svg)](https://codecov.io/gh/fent/node-drange)
+
+# Usage
 
 ```
-DiscontinuousRange(1, 10).subtract(4, 6); // [ 1-3, 7-10 ]
+const DRange = require('drange');
+
+var allNums = new DRange(1, 100); //[ 1-100 ]
+var badNums = DRange(13).add(8).add(60,80); //[8, 13, 60-80]
+var goodNums = allNums.clone().subtract(badNums);
+console.log(goodNums.toString()); //[ 1-7, 9-12, 14-59, 81-100 ]
+var randomGoodNum = goodNums.index(Math.floor(Math.random() * goodNums.length));
 ```
 
-  [![Build Status](https://travis-ci.org/dtudury/discontinuous-range.png)](https://travis-ci.org/dtudury/discontinuous-range)
+# Install
 
-this is a pretty simple module, but it exists to service another project
-so this'll be pretty lacking documentation. 
-reading the test to see how this works may help.  otherwise, here's an example
-that I think pretty much sums it up
-
-
-###Example
+```bash
+npm install drange
 ```
-var all_numbers = new DiscontinuousRange(1, 100); //[ 1-100 ]
-var bad_numbers = DiscontinuousRange(13).add(8).add(60,80); //[8, 13, 60-80]
-var good_numbers = all_numbers.clone().subtract(bad_numbers);
-console.log(good_numbers.toString()); //[ 1-7, 9-12, 14-59, 81-100 ]
-var random_good_number = good_numbers.index(Math.floor(Math.random() * good_numbers.length));
+
+# Tests
+
+Tests are written with [mocha](https://mochajs.org)
+
+```bash
+npm test
 ```

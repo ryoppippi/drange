@@ -1,6 +1,5 @@
 var assert = require('assert');
-
-var DRange = require('../index.js');
+var DRange = require('..');
 
 describe('add sets', function() {
     it('should allow adding numbers', function () {
