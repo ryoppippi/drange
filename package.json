@@ -12,7 +12,7 @@
     "lib"
   ],
   "scripts": {
-    "test": "./node_modules/.bin/mocha test/*-test.js"
+    "test": "istanbul cover node_modules/.bin/_mocha -- test/*-test.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
     "fent (https://github.com/fent)"
   ],
   "devDependencies": {
+    "istanbul": "^0.4.5",
     "mocha": "^5.0.0"
   },
   "license": "MIT"
