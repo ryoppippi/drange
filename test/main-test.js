@@ -25,7 +25,7 @@ describe('add sets', () => {
         assert.equal('[ 0-20 ]', drange.toString());
         assert.equal(drange.length, 21);
     });
-    it('should allow adding another DiscontinuousRange', () => {
+    it('should allow adding another DRange', () => {
         var drange = new DRange(1,5);
         drange.add(15,20);
         var erange = new DRange(6);
@@ -55,7 +55,7 @@ describe('subtract sets', () => {
         assert.equal('[ 1-4, 16-89 ]', drange.toString());
         assert.equal(drange.length, 78);
     });
-    it('should allow subtracting another DiscontinuousRange', () => {
+    it('should allow subtracting another DRange', () => {
         var drange = new DRange(0,100);
         var erange = new DRange(6);
         erange.add(17, 30);
@@ -84,7 +84,7 @@ describe('intersect sets', () => {
         assert.equal('[ 15-18 ]', drange.toString());
         assert.equal(drange.length, 4);
     });
-    it('should allow intersecting another DiscontinuousRange', () => {
+    it('should allow intersecting another DRange', () => {
         var drange = new DRange(1,5);
         drange.add(15,20);
         var erange = new DRange(3,6);
@@ -109,7 +109,7 @@ describe('index sets', () => {
 });
 
 describe('clone sets', () => {
-    it('should be able to clone a DiscontinuousRange that doesn\'t affect the original', () => {
+    it('should be able to clone a DRange that doesn\'t affect the original', () => {
         var drange = new DRange(0, 9);
         var erange = drange.clone();
         erange.subtract(5);
