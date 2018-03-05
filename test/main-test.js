@@ -1,9 +1,10 @@
 var assert = require('assert');
 var DRange = require('..');
 
-describe('add sets', function() {
-    it('should allow adding numbers', function () {
-        var drange = DRange(5);
+/* eslint indent: 4 */
+describe('add sets', () => {
+    it('should allow adding numbers', () => {
+        var drange = new DRange(5);
         assert.equal('[ 5 ]', drange.toString());
         drange.add(6);
         assert.equal('[ 5-6 ]', drange.toString());
@@ -13,8 +14,8 @@ describe('add sets', function() {
         assert.equal('[ 5-8 ]', drange.toString());
         assert.equal(drange.length, 4);
     });
-    it('should allow adding ranges of numbers', function () {
-        var drange = DRange(1,5);
+    it('should allow adding ranges of numbers', () => {
+        var drange = new DRange(1,5);
         assert.equal('[ 1-5 ]', drange.toString());
         drange.add(6,10);
         assert.equal('[ 1-10 ]', drange.toString());
@@ -24,10 +25,10 @@ describe('add sets', function() {
         assert.equal('[ 0-20 ]', drange.toString());
         assert.equal(drange.length, 21);
     });
-    it('should allow adding another DiscontinuousRange', function () {
-        var drange = DRange(1,5);
+    it('should allow adding another DiscontinuousRange', () => {
+        var drange = new DRange(1,5);
         drange.add(15,20);
-        var erange = DRange(6);
+        var erange = new DRange(6);
         erange.add(17, 30);
         drange.add(erange);
         assert.equal('[ 1-6, 15-30 ]', drange.toString());
@@ -35,9 +36,9 @@ describe('add sets', function() {
     });
 });
 
-describe('subtract sets', function() {
-    it('should allow subtracting numbers', function () {
-        var drange = DRange(1, 10);
+describe('subtract sets', () => {
+    it('should allow subtracting numbers', () => {
+        var drange = new DRange(1, 10);
         drange.subtract(5);
         assert.equal('[ 1-4, 6-10 ]', drange.toString());
         drange.subtract(7);
@@ -46,17 +47,17 @@ describe('subtract sets', function() {
         assert.equal('[ 1-4, 8-10 ]', drange.toString());
         assert.equal(drange.length, 7);
     });
-    it('should allow subtracting ranges of numbers', function () {
-        var drange = DRange(1, 100);
+    it('should allow subtracting ranges of numbers', () => {
+        var drange = new DRange(1, 100);
         drange.subtract(5, 15);
         assert.equal('[ 1-4, 16-100 ]', drange.toString());
         drange.subtract(90, 200);
         assert.equal('[ 1-4, 16-89 ]', drange.toString());
         assert.equal(drange.length, 78);
     });
-    it('should allow subtracting another DiscontinuousRange', function () {
-        var drange = DRange(0,100);
-        var erange = DRange(6);
+    it('should allow subtracting another DiscontinuousRange', () => {
+        var drange = new DRange(0,100);
+        var erange = new DRange(6);
         erange.add(17, 30);
         drange.subtract(erange);
         assert.equal('[ 0-5, 7-16, 31-100 ]', drange.toString());
@@ -65,15 +66,15 @@ describe('subtract sets', function() {
 });
 
 
-describe('intersect sets', function() {
-    it('should allow intersecting numbers', function () {
-        var drange = DRange(5,20);
+describe('intersect sets', () => {
+    it('should allow intersecting numbers', () => {
+        var drange = new DRange(5,20);
         assert.equal('[ 5-20 ]', drange.toString());
         drange.intersect(7);
         assert.equal('[ 7 ]', drange.toString());
     });
-    it('should allow intersecting ranges of numbers', function () {
-        var drange = DRange(1,5);
+    it('should allow intersecting ranges of numbers', () => {
+        var drange = new DRange(1,5);
         assert.equal('[ 1-5 ]', drange.toString());
         drange.intersect(6,10);
         assert.equal('[  ]', drange.toString());
@@ -83,10 +84,10 @@ describe('intersect sets', function() {
         assert.equal('[ 15-18 ]', drange.toString());
         assert.equal(drange.length, 4);
     });
-    it('should allow intersecting another DiscontinuousRange', function () {
-        var drange = DRange(1,5);
+    it('should allow intersecting another DiscontinuousRange', () => {
+        var drange = new DRange(1,5);
         drange.add(15,20);
-        var erange = DRange(3,6);
+        var erange = new DRange(3,6);
         erange.add(17, 30);
         drange.intersect(erange);
         assert.equal('[ 3-5, 17-20 ]', drange.toString());
@@ -95,9 +96,9 @@ describe('intersect sets', function() {
 });
 
 
-describe('index sets', function() {
-    it('should appropriately retrieve numbers in range by index', function () {
-        var drange = DRange(0, 9);
+describe('index sets', () => {
+    it('should appropriately retrieve numbers in range by index', () => {
+        var drange = new DRange(0, 9);
         drange.add(20, 29);
         drange.add(40, 49);
         assert.equal(drange.index(5), 5);
@@ -107,9 +108,9 @@ describe('index sets', function() {
     });
 });
 
-describe('clone sets', function() {
-    it('should be able to clone a DiscontinuousRange that doesn\'t affect the original', function () {
-        var drange = DRange(0, 9);
+describe('clone sets', () => {
+    it('should be able to clone a DiscontinuousRange that doesn\'t affect the original', () => {
+        var drange = new DRange(0, 9);
         var erange = drange.clone();
         erange.subtract(5);
         assert.equal('[ 0-9 ]', drange.toString());
@@ -118,7 +119,7 @@ describe('clone sets', function() {
 });
 
 var all_numbers = new DRange(1, 100);
-var bad_numbers = DRange(13).add(8).add(60,80);
+var bad_numbers = new DRange(13).add(8).add(60,80);
 var good_numbers = all_numbers.clone().subtract(bad_numbers);
 console.log(good_numbers.toString());
 var random_good_number = good_numbers.index(Math.floor(Math.random() * good_numbers.length));

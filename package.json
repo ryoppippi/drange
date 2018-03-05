@@ -26,5 +26,8 @@
     "istanbul": "^0.4.5",
     "mocha": "^5.0.0"
   },
+  "engines": {
+    "node": ">=4"
+  },
   "license": "MIT"
 }
