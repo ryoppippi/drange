@@ -2,6 +2,13 @@ var assert = require('assert');
 var DRange = require('..');
 
 /* eslint indent: 4 */
+describe('empty drange', () => {
+    it('should initialize with no subranges', () => {
+        var drange = new DRange();
+        assert.equal('[  ]', drange.toString());
+    });
+});
+
 describe('add sets', () => {
     it('should allow adding numbers', () => {
         var drange = new DRange(5);
@@ -59,9 +66,10 @@ describe('subtract sets', () => {
         var drange = new DRange(0, 100);
         var erange = new DRange(6);
         erange.add(17, 30);
+        erange.add(0, 2);
         drange.subtract(erange);
-        assert.equal('[ 0-5, 7-16, 31-100 ]', drange.toString());
-        assert.equal(drange.length, 86);
+        assert.equal('[ 3-5, 7-16, 31-100 ]', drange.toString());
+        assert.equal(drange.length, 83);
     });
 });
 
