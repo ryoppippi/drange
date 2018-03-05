@@ -15,19 +15,19 @@ describe('add sets', () => {
         assert.equal(drange.length, 4);
     });
     it('should allow adding ranges of numbers', () => {
-        var drange = new DRange(1,5);
+        var drange = new DRange(1, 5);
         assert.equal('[ 1-5 ]', drange.toString());
-        drange.add(6,10);
+        drange.add(6, 10);
         assert.equal('[ 1-10 ]', drange.toString());
-        drange.add(15,20);
+        drange.add(15, 20);
         assert.equal('[ 1-10, 15-20 ]', drange.toString());
-        drange.add(0,14);
+        drange.add(0, 14);
         assert.equal('[ 0-20 ]', drange.toString());
         assert.equal(drange.length, 21);
     });
     it('should allow adding another DRange', () => {
-        var drange = new DRange(1,5);
-        drange.add(15,20);
+        var drange = new DRange(1, 5);
+        drange.add(15, 20);
         var erange = new DRange(6);
         erange.add(17, 30);
         drange.add(erange);
@@ -56,7 +56,7 @@ describe('subtract sets', () => {
         assert.equal(drange.length, 78);
     });
     it('should allow subtracting another DRange', () => {
-        var drange = new DRange(0,100);
+        var drange = new DRange(0, 100);
         var erange = new DRange(6);
         erange.add(17, 30);
         drange.subtract(erange);
@@ -65,36 +65,34 @@ describe('subtract sets', () => {
     });
 });
 
-
 describe('intersect sets', () => {
     it('should allow intersecting numbers', () => {
-        var drange = new DRange(5,20);
+        var drange = new DRange(5, 20);
         assert.equal('[ 5-20 ]', drange.toString());
         drange.intersect(7);
         assert.equal('[ 7 ]', drange.toString());
     });
     it('should allow intersecting ranges of numbers', () => {
-        var drange = new DRange(1,5);
+        var drange = new DRange(1, 5);
         assert.equal('[ 1-5 ]', drange.toString());
-        drange.intersect(6,10);
+        drange.intersect(6, 10);
         assert.equal('[  ]', drange.toString());
-        drange.add(15,20);
+        drange.add(15, 20);
         assert.equal('[ 15-20 ]', drange.toString());
-        drange.intersect(0,18);
+        drange.intersect(0, 18);
         assert.equal('[ 15-18 ]', drange.toString());
         assert.equal(drange.length, 4);
     });
     it('should allow intersecting another DRange', () => {
-        var drange = new DRange(1,5);
-        drange.add(15,20);
-        var erange = new DRange(3,6);
+        var drange = new DRange(1, 5);
+        drange.add(15, 20);
+        var erange = new DRange(3, 6);
         erange.add(17, 30);
         drange.intersect(erange);
         assert.equal('[ 3-5, 17-20 ]', drange.toString());
         assert.equal(drange.length, 7);
     });
 });
-
 
 describe('index sets', () => {
     it('should appropriately retrieve numbers in range by index', () => {
@@ -117,10 +115,3 @@ describe('clone sets', () => {
         assert.equal('[ 0-4, 6-9 ]', erange.toString());
     });
 });
-
-var all_numbers = new DRange(1, 100);
-var bad_numbers = new DRange(13).add(8).add(60,80);
-var good_numbers = all_numbers.clone().subtract(bad_numbers);
-console.log(good_numbers.toString());
-var random_good_number = good_numbers.index(Math.floor(Math.random() * good_numbers.length));
-console.log(random_good_number);
