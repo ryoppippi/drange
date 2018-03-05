@@ -18,16 +18,51 @@ console.log(goodNums.toString()); //[ 1-7, 9-12, 14-59, 81-100 ]
 var randomGoodNum = goodNums.index(Math.floor(Math.random() * goodNums.length));
 ```
 
+# API
+### new DRange([low], [high])
+Creates a new instance of DRange.
+
+### DRange#length
+The total length of all subranges
+
+### DRange#add(low, high)
+Adds a subrange
+
+###DRange#add(drange)
+Adds all of another DRange's subranges
+
+### DRange#subtract(low, high)
+Subtracts a subrange
+
+### DRange#subtract(drange)
+Subtracts all of another DRange's subranges
+
+### DRange#intersect(low, range)
+Keep only subranges that overlap the given subrange
+
+### DRange#intersect(drange)
+Intersect all of another DRange's subranges
+
+### DRange#index(i)
+Get the number at the specified index
+
+```js
+var drange = DRange()
+drange.add(1, 10);
+drange.add(21, 30);
+console.log(drange.index(15)); // 25
+```
+
+### DRange#clone()
+Clones the drange, so that changes to it are not reflected on its clone
+
+
 # Install
 
-```bash
-npm install drange
-```
+    npm install drange
 
 # Tests
 
 Tests are written with [mocha](https://mochajs.org)
 
-```bash
-npm test
-```
+    npm test
