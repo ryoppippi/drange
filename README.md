@@ -28,7 +28,7 @@ The total length of all subranges
 ### DRange#add(low, high)
 Adds a subrange
 
-###DRange#add(drange)
+### DRange#add(drange)
 Adds all of another DRange's subranges
 
 ### DRange#subtract(low, high)
@@ -66,3 +66,17 @@ Clones the drange, so that changes to it are not reflected on its clone
 Tests are written with [mocha](https://mochajs.org)
 
     npm test
+
+# Integration with TypeScript
+
+DRange includes TypeScript definitions.
+
+```typescript
+import * as DRange from "drange";
+const range: DRange = new Drange(2, 5);
+```
+
+Use dtslint to check the definition file.
+
+    npm install -g dtslint
+    npm run dtslint
