@@ -1,17 +1,17 @@
-var assert = require('assert');
-var DRange = require('..');
+const assert = require('assert');
+const DRange = require('..');
 
-/* eslint indent: 4 */
+/* eslint indent: ["warn", 4] */
 describe('empty drange', () => {
     it('should initialize with no subranges', () => {
-        var drange = new DRange();
+        const drange = new DRange();
         assert.equal('[  ]', drange.toString());
     });
 });
 
 describe('add sets', () => {
     it('should allow adding numbers', () => {
-        var drange = new DRange(5);
+        const drange = new DRange(5);
         assert.equal('[ 5 ]', drange.toString());
         drange.add(6);
         assert.equal('[ 5-6 ]', drange.toString());
@@ -22,7 +22,7 @@ describe('add sets', () => {
         assert.equal(drange.length, 4);
     });
     it('should allow adding ranges of numbers', () => {
-        var drange = new DRange(1, 5);
+        const drange = new DRange(1, 5);
         assert.equal('[ 1-5 ]', drange.toString());
         drange.add(6, 10);
         assert.equal('[ 1-10 ]', drange.toString());
@@ -33,9 +33,9 @@ describe('add sets', () => {
         assert.equal(drange.length, 21);
     });
     it('should allow adding another DRange', () => {
-        var drange = new DRange(1, 5);
+        const drange = new DRange(1, 5);
         drange.add(15, 20);
-        var erange = new DRange(6);
+        const erange = new DRange(6);
         erange.add(17, 30);
         drange.add(erange);
         assert.equal('[ 1-6, 15-30 ]', drange.toString());
@@ -45,7 +45,7 @@ describe('add sets', () => {
 
 describe('subtract sets', () => {
     it('should allow subtracting numbers', () => {
-        var drange = new DRange(1, 10);
+        const drange = new DRange(1, 10);
         drange.subtract(5);
         assert.equal('[ 1-4, 6-10 ]', drange.toString());
         drange.subtract(7);
@@ -55,7 +55,7 @@ describe('subtract sets', () => {
         assert.equal(drange.length, 7);
     });
     it('should allow subtracting ranges of numbers', () => {
-        var drange = new DRange(1, 100);
+        const drange = new DRange(1, 100);
         drange.subtract(5, 15);
         assert.equal('[ 1-4, 16-100 ]', drange.toString());
         drange.subtract(90, 200);
@@ -63,8 +63,8 @@ describe('subtract sets', () => {
         assert.equal(drange.length, 78);
     });
     it('should allow subtracting another DRange', () => {
-        var drange = new DRange(0, 100);
-        var erange = new DRange(6);
+        const drange = new DRange(0, 100);
+        const erange = new DRange(6);
         erange.add(17, 30);
         erange.add(0, 2);
         drange.subtract(erange);
@@ -75,13 +75,13 @@ describe('subtract sets', () => {
 
 describe('intersect sets', () => {
     it('should allow intersecting numbers', () => {
-        var drange = new DRange(5, 20);
+        const drange = new DRange(5, 20);
         assert.equal('[ 5-20 ]', drange.toString());
         drange.intersect(7);
         assert.equal('[ 7 ]', drange.toString());
     });
     it('should allow intersecting ranges of numbers', () => {
-        var drange = new DRange(1, 5);
+        const drange = new DRange(1, 5);
         assert.equal('[ 1-5 ]', drange.toString());
         drange.intersect(6, 10);
         assert.equal('[  ]', drange.toString());
@@ -92,9 +92,9 @@ describe('intersect sets', () => {
         assert.equal(drange.length, 4);
     });
     it('should allow intersecting another DRange', () => {
-        var drange = new DRange(1, 5);
+        const drange = new DRange(1, 5);
         drange.add(15, 20);
-        var erange = new DRange(3, 6);
+        const erange = new DRange(3, 6);
         erange.add(17, 30);
         drange.intersect(erange);
         assert.equal('[ 3-5, 17-20 ]', drange.toString());
@@ -104,7 +104,7 @@ describe('intersect sets', () => {
 
 describe('index sets', () => {
     it('should appropriately retrieve numbers in range by index', () => {
-        var drange = new DRange(0, 9);
+        const drange = new DRange(0, 9);
         drange.add(20, 29);
         drange.add(40, 49);
         assert.equal(drange.index(5), 5);
@@ -116,8 +116,8 @@ describe('index sets', () => {
 
 describe('clone sets', () => {
     it('should be able to clone a DRange that doesn\'t affect the original', () => {
-        var drange = new DRange(0, 9);
-        var erange = drange.clone();
+        const drange = new DRange(0, 9);
+        const erange = drange.clone();
         erange.subtract(5);
         assert.equal('[ 0-9 ]', drange.toString());
         assert.equal('[ 0-4, 6-9 ]', erange.toString());
@@ -126,10 +126,10 @@ describe('clone sets', () => {
 
 describe('accessing numbers', () => {
     it('should be able to get contained numbers', () => {
-        var drange = new DRange(1, 4);
+        const drange = new DRange(1, 4);
         drange.subtract(2);
         drange.add(6);
-        var numbers = drange.numbers();
+        const numbers = drange.numbers();
         assert.deepStrictEqual([1, 3, 4, 6], numbers);
         drange.subtract(3);
         assert.deepStrictEqual([1, 3, 4, 6], numbers);
@@ -138,10 +138,10 @@ describe('accessing numbers', () => {
 
 describe('accessing subranges', () => {
     it('should be able to get copy of subranges', () => {
-        var drange = new DRange(1, 4);
+        const drange = new DRange(1, 4);
         drange.add(6, 8);
-        var subranges = drange.subranges();
-        var expect = [
+        const subranges = drange.subranges();
+        const expect = [
             {
                 low: 1,
                 high: 4,
@@ -157,4 +157,4 @@ describe('accessing subranges', () => {
         drange.subtract(6, 8);
         assert.deepStrictEqual(expect, subranges);
     });
-})
+});

@@ -11,11 +11,11 @@ For adding/subtracting sets of range of numbers.
 ```
 const DRange = require('drange');
 
-var allNums = new DRange(1, 100); //[ 1-100 ]
-var badNums = DRange(13).add(8).add(60,80); //[8, 13, 60-80]
-var goodNums = allNums.clone().subtract(badNums);
+let allNums = new DRange(1, 100); //[ 1-100 ]
+let badNums = DRange(13).add(8).add(60,80); //[8, 13, 60-80]
+let goodNums = allNums.clone().subtract(badNums);
 console.log(goodNums.toString()); //[ 1-7, 9-12, 14-59, 81-100 ]
-var randomGoodNum = goodNums.index(Math.floor(Math.random() * goodNums.length));
+let randomGoodNum = goodNums.index(Math.floor(Math.random() * goodNums.length));
 ```
 
 # API
@@ -47,7 +47,7 @@ Intersect all of another DRange's subranges
 Get the number at the specified index
 
 ```js
-var drange = new DRange()
+let drange = new DRange()
 drange.add(1, 10);
 drange.add(21, 30);
 console.log(drange.index(15)); // 25
@@ -57,7 +57,7 @@ console.log(drange.index(15)); // 25
 Get contained numbers
 
 ```js
-var drange = new DRange(1, 4)
+let drange = new DRange(1, 4)
 drange.add(6);
 drange.subtract(2);
 console.log(drange.numbers()); // [1, 3, 4, 6]
@@ -67,7 +67,7 @@ console.log(drange.numbers()); // [1, 3, 4, 6]
 Get copy of subranges
 
 ```js
-var drange = new DRange(1, 4)
+let drange = new DRange(1, 4)
 drange.add(6, 8);
 console.log(drange.subranges());
 /*
