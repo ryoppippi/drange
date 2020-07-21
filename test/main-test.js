@@ -41,6 +41,19 @@ describe('add sets', () => {
         assert.equal(drange.toString(), '[ 1-6, 15-30 ]');
         assert.equal(drange.length, 22);
     });
+    it('in the beginning of the range', () => {
+        const drange = new DRange(10, 20);
+        assert.equal(drange.toString(), '[ 10-20 ]');
+        drange.add(5, 7);
+        assert.equal(drange.toString(), '[ 5-7, 10-20 ]');
+    });
+    it('between entries in the range', () => {
+        const drange = new DRange(10, 20);
+        assert.equal(drange.toString(), '[ 10-20 ]');
+        drange.add(0, 5);
+        drange.add(7, 8);
+        assert.equal(drange.toString(), '[ 0-5, 7-8, 10-20 ]');
+    });
 });
 
 describe('subtract sets', () => {
@@ -70,6 +83,14 @@ describe('subtract sets', () => {
         drange.subtract(erange);
         assert.equal(drange.toString(), '[ 3-5, 7-16, 31-100 ]');
         assert.equal(drange.length, 83);
+    });
+    it('should allow subtracting ranges added out of order', () => {
+        const drange = new DRange();
+        drange.add(4, 6);
+        drange.add(15, 20);
+        drange.add(8, 12);
+        drange.subtract(5, 10);
+        assert.equal(drange.toString(), '[ 4, 11-12, 15-20 ]');
     });
 });
 
