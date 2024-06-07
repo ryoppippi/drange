@@ -17,7 +17,7 @@
       "*.md"
     ]
   },
-  "exports": "./lib/index.js",
+  "exports": "./mod.ts",
   "keywords": [
     "discontinuous",
     "range",
