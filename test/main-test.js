@@ -1,5 +1,5 @@
-const assert = require('assert');
-const DRange = require('..');
+import assert from 'node:assert';
+import { DRange } from '../src/drange.js';
 
 /* eslint indent: ["warn", 4] */
 describe('empty drange', () => {
